@@ -4,27 +4,6 @@
   (global = global || self, global.GLightbox = factory());
 }(this, (function () { 'use strict';
 
-  function ownKeys(e, r) {
-    var t = Object.keys(e);
-    if (Object.getOwnPropertySymbols) {
-      var o = Object.getOwnPropertySymbols(e);
-      r && (o = o.filter(function (r) {
-        return Object.getOwnPropertyDescriptor(e, r).enumerable;
-      })), t.push.apply(t, o);
-    }
-    return t;
-  }
-  function _objectSpread2(e) {
-    for (var r = 1; r < arguments.length; r++) {
-      var t = null != arguments[r] ? arguments[r] : {};
-      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
-        _defineProperty(e, r, t[r]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
-        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-      });
-    }
-    return e;
-  }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
@@ -69,20 +48,6 @@
       writable: false
     });
     return Constructor;
-  }
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
   }
 
   var uid = Date.now();
@@ -2184,18 +2149,6 @@
     function GlightboxInit() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       _classCallCheck(this, GlightboxInit);
-      if (options.direction === 'rtl') {
-        defaults.cssEfects = _objectSpread2(_objectSpread2({}, defaults.cssEfects), {}, {
-          slide: {
-            "in": 'slideInLeft',
-            out: 'slideOutRight'
-          },
-          slideBack: {
-            "in": 'slideInRight',
-            out: 'slideOutLeft'
-          }
-        });
-      }
       this.customOptions = options;
       this.settings = extend(defaults, options);
       this.effectsClasses = this.getAnimationClasses();
@@ -2248,6 +2201,11 @@
           index = 0;
         }
         this.build();
+        if (this.settings.direction === 'rtl') {
+          var slideEffect = this.settings.cssEfects.slide;
+          this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
+          this.settings.cssEfects.slideBack = slideEffect;
+        }
         animateElement(this.overlay, this.settings.openEffect === 'none' ? 'none' : this.settings.cssEfects.fade["in"]);
         var body = document.body;
         var scrollBar = window.innerWidth - document.documentElement.clientWidth;
