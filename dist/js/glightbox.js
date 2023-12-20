@@ -992,8 +992,8 @@
     var isInlined;
     var sliderWrapper = document.getElementById('glightbox-slider');
     var overlay = document.querySelector('.goverlay');
-    var prevSlideDirection = instance.settings.direction === 'rtl' ? 'Right' : 'Left';
-    var nextSlideDirection = instance.settings.direction === 'rtl' ? 'Left' : 'Right';
+    var prevSlideDirection = instance.settings.direction === 'rtl' ? 'Left' : 'Right';
+    var nextSlideDirection = instance.settings.direction === 'rtl' ? 'Right' : 'Left';
     var touchInstance = new TouchEvents(sliderWrapper, {
       touchStart: function touchStart(e) {
         process = true;
