@@ -184,13 +184,6 @@ class GlightboxInit {
 
         this.build();
 
-        if (this.settings.direction === 'rtl') {
-            // swap the slide and slideBack effects
-            const slideEffect = this.settings.cssEfects.slide;
-            this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
-            this.settings.cssEfects.slideBack = slideEffect;
-        }
-
         _.animateElement(this.overlay, this.settings.openEffect === 'none' ? 'none' : this.settings.cssEfects.fade.in);
 
         const body = document.body;
@@ -945,6 +938,13 @@ class GlightboxInit {
     build() {
         if (this.built) {
             return false;
+        }
+
+        if (this.settings.direction === 'rtl') {
+            // swap the slide and slideBack effects
+            const slideEffect = this.settings.cssEfects.slide;
+            this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
+            this.settings.cssEfects.slideBack = slideEffect;
         }
 
         // TODO: :scope is not supported on IE or first Edge. so we'll

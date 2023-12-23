@@ -2201,11 +2201,6 @@
           index = 0;
         }
         this.build();
-        if (this.settings.direction === 'rtl') {
-          var slideEffect = this.settings.cssEfects.slide;
-          this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
-          this.settings.cssEfects.slideBack = slideEffect;
-        }
         animateElement(this.overlay, this.settings.openEffect === 'none' ? 'none' : this.settings.cssEfects.fade["in"]);
         var body = document.body;
         var scrollBar = window.innerWidth - document.documentElement.clientWidth;
@@ -2773,6 +2768,11 @@
         var _this7 = this;
         if (this.built) {
           return false;
+        }
+        if (this.settings.direction === 'rtl') {
+          var slideEffect = this.settings.cssEfects.slide;
+          this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
+          this.settings.cssEfects.slideBack = slideEffect;
         }
         var children = document.body.childNodes;
         var bodyChildElms = [];
