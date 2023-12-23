@@ -2753,6 +2753,12 @@
       key: "getAnimationClasses",
       value: function getAnimationClasses() {
         var effects = [];
+        if (this.settings.direction === 'rtl') {
+          console.log('Swapping settings.direction from rtl to ltr');
+          var slideEffect = this.settings.cssEfects.slide;
+          this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
+          this.settings.cssEfects.slideBack = slideEffect;
+        }
         for (var key in this.settings.cssEfects) {
           if (this.settings.cssEfects.hasOwnProperty(key)) {
             var effect = this.settings.cssEfects[key];
@@ -2768,11 +2774,6 @@
         var _this7 = this;
         if (this.built) {
           return false;
-        }
-        if (this.settings.direction === 'rtl') {
-          var slideEffect = this.settings.cssEfects.slide;
-          this.settings.cssEfects.slide = this.settings.cssEfects.slideBack;
-          this.settings.cssEfects.slideBack = slideEffect;
         }
         var children = document.body.childNodes;
         var bodyChildElms = [];
